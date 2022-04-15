@@ -1,0 +1,36 @@
+<h3>Etes-vous sûr ?</h3>
+<%= form_with(model: @property, url: properties_path, local: true) do |form| %>
+  <div>
+    <p>
+      <strong>Property:</strong>
+      <%= @property.propert %>
+      <%= form.hidden_field :propert %>
+    </p>
+    <p>
+      <strong>Rent</strong>
+      <%= @property.rent %>
+      <%= form.hidden_field :rent %>
+    </p>
+    <p>
+      <strong>Address:</strong>
+      <%= @property.address %>
+      <%= form.hidden_field :address %>
+    </p>
+    <p>
+      <strong>Building age:</strong>
+      <%= @property.building_age %>
+      <%= form.hidden_field :building_age %>
+    </p>
+    <p>
+      <strong>Remarks:</strong>
+      <%= @property.remarks %>
+      <%= form.hidden_field :remarks %>
+    </p>
+  </div>
+
+ <%= form.submit "PUBLIER" %>
+ <% end %>
+ <br>
+ <%= form_with(model: @property, url: new_property_path, local: true, method: "get") do |form| %>
+ <%= form.submit "RETOUR", name: 'Back' %>
+<% end %>
