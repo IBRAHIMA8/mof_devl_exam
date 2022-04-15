@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2022_04_13_235804) do
   end
 
   create_table "properties", force: :cascade do |t|
-    t.string "property"
+    t.string "propert"
     t.integer "rent"
     t.text "address"
     t.integer "building_age"

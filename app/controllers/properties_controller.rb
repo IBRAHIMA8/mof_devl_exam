@@ -3,7 +3,7 @@ class PropertiesController < ApplicationController
 
   # GET /properties or /properties.json
   def index
-    @properties = Property.all
+    @properties = ::Property.all
   end
 
   # GET /properties/1 or /properties/1.json
@@ -12,11 +12,22 @@ class PropertiesController < ApplicationController
 
   # GET /properties/new
   def new
+  if params[:back]
+    @property = Property.new(property_params)
+  else
     @property = Property.new
+    2.times { @property.nearest_stations.build }
   end
+end
 
   # GET /properties/1/edit
   def edit
+    @property.nearest_stations.build
+  end
+
+  def confirm
+     @property = Property.new(property_params)
+     render :new if @property.invalid?
   end
 
   # POST /properties or /properties.json
@@ -65,6 +76,6 @@ class PropertiesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def property_params
-      params.require(:property).permit(:property, :rent, :address, :building_age, :remarks)
+      params.require(:property).permit(:propert, :rent, :address, :building_age, :remarks, nearest_stations_attributes:[:id, :name, :railway, :time])
     end
 end
